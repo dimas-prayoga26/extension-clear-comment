@@ -14,19 +14,15 @@ export function activate(context: vscode.ExtensionContext) {
 		const fullText = document.getText();
 
 		const cleanedLines = fullText
-			.split('\n')
-			.map(line => {
-				let cleaned = line;
+		.split('\n')
+		.map(line => {
+			let cleaned = line;
 
-				if (/^\s*(\/\/|#|<!--|{{--)/.test(line)) {
-					return '';
-				}
+			if (/^\s*(\/\/|#|<!--|{{--.*--}})/.test(line)) return '';
 
-				if (/https?:\/\//.test(line)) {
-					return line.trimEnd();
-				}
+			const containsUrl = line.includes('http://') || line.includes('https://');
 
-				if (/['"].*#.*['"]/.test(line)) {
+			if (/['"].*#.*['"]/.test(line)) {
 					cleaned = cleaned
 						.replace(/(?<!https:)(?<!http:)\/\/.*$/, '')
 						.replace(/<!--.*?-->/g, '')
@@ -34,22 +30,26 @@ export function activate(context: vscode.ExtensionContext) {
 					return cleaned.trimEnd();
 				}
 
-				cleaned = cleaned
-					.replace(/(?<!https:)(?<!http:)\/\/.*$/, '')
+			if (!containsUrl) {
+			cleaned = cleaned
+				.replace(/(?<!https:)(?<!http:)\/\/.*$/, '')
 					.replace(/\/\/.*(?=[^\n]*$)/, '')
 					.replace(/#.*(?=[^\n]*$)/, '')
 					.replace(/<!--[\s\S]*?-->/g, '')
 					.replace(/\{\{--[\s\S]*?--\}\}/g, '');
+			}
 
-				return cleaned.trimEnd();
-			});
+			return cleaned.trimEnd();
+		});
+
 
 		let noComments = cleanedLines.join('\n');
 
 		noComments = noComments
-			.replace(/\/\*[\s\S]*?\*\//g, '') 
-			.replace(/\{\{--[\s\S]*?--\}\}/g, '') 
-			.replace(/<!--[\s\S]*?-->/g, ''); 
+		.replace(/\/\*[\s\S]*?\*\//g, '')
+		.replace(/{{--[\s\S]*?--}}/g, '')
+		.replace(/<!--[\s\S]*?-->/g, '');
+
 
 		const fullRange = new vscode.Range(
 			document.positionAt(0),
