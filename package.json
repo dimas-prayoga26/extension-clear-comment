@@ -1,8 +1,8 @@
 {
   "name": "hapus-komentar",
-  "displayName": "hapus-komentar",
-  "description": "Clear komentar code",
-  "version": "0.0.1",
+  "displayName": "Clear Comments",
+  "description": "A VS Code extension to automatically remove comments from source files.",
+  "version": "1.0.1",
   "publisher": "Siinchi",
   "repository": {
     "type": "git",

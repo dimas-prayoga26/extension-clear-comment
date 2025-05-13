@@ -1,13 +1,16 @@
 # Hapus Komentar
 
-Extension Visual Studio Code untuk menghapus semua jenis komentar di file aktif secara otomatis.
+A Visual Studio Code extension to automatically remove all types of comments from the active file.
 
-### Fitur:
-- Menghapus komentar `//`, `/* */`, `<!-- -->`, `{{-- --}}`, `#`
-- Mendukung file JavaScript, HTML, PHP, dan Blade Laravel
-- Aman untuk URL seperti `https://` dan Blade directive seperti `{{ route(...) }}`
+### Features:
+- Removes `//`, `/* */`, `<!-- -->`, `{{-- --}}`, and `#` style comments
+- Supports JavaScript, HTML, PHP, and Laravel Blade files
 
-### Cara Menggunakan:
-1. Buka file kode yang ingin dibersihkan
-2. Tekan `Ctrl+Shift+P`
-3. Jalankan command: `Hapus Semua Komentar`
+### How to Use:
+1. Open the code file you want to clean
+2. Press `Ctrl+Shift+P` to open the Command Palette
+3. Run the command: `Hapus Semua Komentar`
+
+### Notes:
+- This extension is designed for quick cleaning and code preparation.
+- Multi-line comments and inline comments will be handled automatically.
